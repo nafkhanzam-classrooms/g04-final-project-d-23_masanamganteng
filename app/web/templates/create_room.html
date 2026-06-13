@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Buat Room - {{ app_name }}</title>
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body class="page">
+  <div class="app-shell narrow">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Create Room</p>
+        <h1>Buat Room</h1>
+      </div>
+      <button class="btn btn-ghost" id="themeToggle">🌗 Mode</button>
+    </header>
+
+    <section class="card">
+      <form id="createRoomForm" class="form-stack">
+        <label>
+          Nama
+          <input id="name" name="name" type="text" maxlength="24" placeholder="Nama player" required />
+        </label>
+        <label>
+          Jumlah Pemain
+          <input id="maxPlayers" name="max_players" type="number" min="2" max="6" value="2" required />
+        </label>
+        <label>
+          Tipe Permainan
+          <select id="gameType" name="game_type">
+            <option value="easy" selected>easy</option>
+            <option value="medium">medium</option>
+            <option value="hard">hard</option>
+          </select>
+        </label>
+        <button class="btn btn-primary" type="submit">Buat Room</button>
+        <p id="formMessage" class="message"></p>
+      </form>
+    </section>
+  </div>
+
+  <script src="/static/js/common.js"></script>
+  <script>
+    document.getElementById('createRoomForm').addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const sessionId = JT.getTabSessionId();
+      const name = document.getElementById('name').value.trim();
+      const maxPlayers = Number(document.getElementById('maxPlayers').value);
+      const gameType = document.getElementById('gameType').value;
+      const msg = document.getElementById('formMessage');
+      msg.textContent = 'Membuat room...';
+      try {
+        const res = await fetch('/api/rooms', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({session_id: sessionId, name, max_players: maxPlayers, game_type: gameType})
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.message || 'Gagal membuat room');
+        JT.saveRoomSession(data.room.room_id, {session_id: sessionId, name, is_creator: true});
+        window.location.href = `/room/${data.room.room_id}`;
+      } catch (err) {
+        msg.textContent = err.message;
+      }
+    });
+  </script>
+</body>
+</html>

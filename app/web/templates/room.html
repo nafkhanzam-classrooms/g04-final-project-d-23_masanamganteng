@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Room {{ room_id }} - {{ app_name }}</title>
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body class="page" data-room-id="{{ room_id }}" data-countdown="{{ countdown }}" data-max-runtime="{{ max_runtime }}">
+  <div class="app-shell room-shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Room <span id="roomIdLabel">{{ room_id }}</span></p>
+        <h1>Jempol Turbo</h1>
+      </div>
+      <div class="top-actions">
+        <button class="btn btn-ghost" id="themeToggle">🌗 Mode</button>
+        <a class="btn btn-ghost" href="/home" id="backHomeBtn">Home</a>
+      </div>
+    </header>
+
+    <section class="status-panel card">
+      <div>
+        <p class="eyebrow">Status</p>
+        <h2 id="stateLabel">Connecting...</h2>
+      </div>
+      <div class="countdown" id="countdownLabel">-</div>
+    </section>
+
+    <section class="card race-card">
+      <div class="section-head">
+        <h2>Race Progress</h2>
+        <span id="gameTypeBadge" class="badge">-</span>
+      </div>
+      <div id="raceLanes" class="race-lanes"></div>
+    </section>
+
+    <section class="card typing-card">
+      <div class="section-head">
+        <h2>Typing Area</h2>
+        <span id="typingHint" class="badge">locked</span>
+      </div>
+      <div id="targetText" class="typing-text" aria-label="target text"></div>
+      <textarea id="typingInput" class="typing-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" disabled></textarea>
+    </section>
+
+    <section class="grid two result-grid">
+      <article class="card result-card">
+        <h2>Result Pribadi</h2>
+        <div id="personalResult" class="result-box muted">Belum selesai.</div>
+      </article>
+      <article class="card result-card">
+        <h2>Result Global</h2>
+        <div id="globalResult" class="result-box muted">Menunggu semua player selesai.</div>
+      </article>
+    </section>
+  </div>
+
+  <div id="joinModal" class="modal visible">
+    <div class="modal-card">
+      <h2>Masuk Room</h2>
+      <p>Isi nama untuk ikut balapan. Nama tidak boleh sama dalam satu room.</p>
+      <input id="joinName" maxlength="24" placeholder="Nama player" />
+      <button id="joinBtn" class="btn btn-primary">Main</button>
+      <p id="joinMessage" class="message"></p>
+    </div>
+  </div>
+
+  <div id="waitingModal" class="modal hidden">
+    <div class="modal-card wide">
+      <h2>Menunggu Player</h2>
+      <p id="waitingInfo">-</p>
+      <div id="waitingPlayers" class="waiting-players"></div>
+      <button id="hardStartBtn" class="btn btn-primary hidden">Mulai Sekarang</button>
+      <button id="leaveBtn" class="btn btn-danger">Leave Room</button>
+    </div>
+  </div>
+
+  <script src="/static/js/common.js"></script>
+  <script src="/static/js/room.js"></script>
+</body>
+</html>

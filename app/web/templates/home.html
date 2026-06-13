@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Home - {{ app_name }}</title>
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body class="page">
+  <div class="app-shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Arena</p>
+        <h1>Jempol Turbo</h1>
+      </div>
+      <button class="btn btn-ghost" id="themeToggle">🌗 Mode</button>
+    </header>
+
+    <section class="grid two">
+      <article class="card create-card">
+        <h2>Buat room sendiri</h2>
+        <p>Buat arena typing battle, tentukan jumlah pemain, lalu bagikan link room ke temanmu.</p>
+        <a class="btn btn-primary" href="/create_room">Buat Room</a>
+      </article>
+      <article class="card">
+        <h2>Info Singkat</h2>
+        <p>Room yang penuh otomatis hilang dari daftar. Jika player keluar saat waiting, kapasitas akan diperbarui real-time.</p>
+      </article>
+    </section>
+
+    <section class="card room-list-card">
+      <div class="section-head">
+        <h2>Room Tersedia</h2>
+        <span id="wsStatus" class="badge">connecting</span>
+      </div>
+      <div id="roomList" class="room-list empty">Belum ada room tersedia.</div>
+    </section>
+  </div>
+
+  <script src="/static/js/common.js"></script>
+  <script src="/static/js/home.js"></script>
+</body>
+</html>
