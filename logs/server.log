@@ -1,0 +1,6 @@
+2026-06-13 20:27:19,360 INFO app.network.tcp_server raw tcp server listening on 127.0.0.1:5050
+2026-06-13 20:27:19,361 INFO root Jempol Turbo started
+2026-06-13 20:28:01,460 INFO app.network.tcp_server tcp client connected ('127.0.0.1', 15641)
+2026-06-13 20:28:44,531 INFO app.network.tcp_server raw tcp server stopped
+2026-06-13 20:28:44,534 INFO root Jempol Turbo stopped
+2026-06-13 20:28:44,535 INFO app.network.tcp_server tcp client disconnected ('127.0.0.1', 15641)

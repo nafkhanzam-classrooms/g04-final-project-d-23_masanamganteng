@@ -1,14 +1,16 @@
 """Central configuration for Jempol Turbo."""
 
+import os
 from __future__ import annotations
 
 APP_NAME = "Jempol Turbo"
 APP_DESCRIPTION = "Real-Time Typing Battle berbasis WebSocket + Raw TCP Python."
 
-HTTP_HOST = "127.0.0.1"
-HTTP_PORT = 8000
-TCP_HOST = "127.0.0.1"
-TCP_PORT = 5050
+HTTP_HOST = os.getenv("HTTP_HOST", "0.0.0.0")
+HTTP_PORT = int(os.getenv("PORT", os.getenv("HTTP_PORT", "8000")))
+
+TCP_HOST = os.getenv("TCP_HOST", "127.0.0.1")
+TCP_PORT = int(os.getenv("TCP_PORT", "5050"))
 
 COUNTDOWN_SECONDS = 5
 MAX_RUNTIME_SECONDS = 200
